@@ -28,7 +28,7 @@ model = load_model()
 def preprocess_image(image_file):
     image = Image.open(image_file)
     image = image.resize((128, 128))
-    image_arr = np.array(image.convert("L"))
+    image_arr = np.array(image.convert("RGB"))
     image_arr = image_arr / 255.0  # Normalize the image
     image_arr = np.expand_dims(image_arr, axis=0)
     return image_arr
