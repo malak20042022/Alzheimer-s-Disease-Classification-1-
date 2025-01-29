@@ -10,7 +10,7 @@ dataset_test=tf.keras.preprocessing.image_dataset_from_directory(
     'C:/Users/dohac/Documents/dataset of project/Combined Dataset/test',
     shuffle=True,
     image_size=(image_size,image_size),
-    batch_size=batch_size
+    batch_size=batch_size,
     color_mode="grayscale"
 )
 
@@ -18,7 +18,7 @@ dataset_train=tf.keras.preprocessing.image_dataset_from_directory(
     'C:/Users/dohac/Documents/dataset of project/Combined Dataset/train',
     shuffle=True,
     image_size=(image_size,image_size),
-    batch_size=batch_size
+    batch_size=batch_size,
     color_mode="grayscale"
 )
 
