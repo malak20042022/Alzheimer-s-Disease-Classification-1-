@@ -29,8 +29,8 @@ def preprocess_image(image_file):
     image = Image.open(image_file).convert("L")  # Convert to grayscale
     image = image.resize((128, 128))
     image_arr = np.array(image) / 255.0  # Normalize
-    image_arr = np.expand_dims(image_arr, axis=-1)  # Add channel dimension (H, W, 1)
-    image_arr = np.expand_dims(image_arr, axis=0)   # Add batch dimension (1, H, W, 1)
+    image_arr = np.expand_dims(image_arr, axis=-1)  # Ensure shape (128, 128, 1)
+    image_arr = np.expand_dims(image_arr, axis=0)  # Ensure shape (1, 128, 128, 1)
     return image_arr
 
 
