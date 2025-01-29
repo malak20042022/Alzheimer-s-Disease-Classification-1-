@@ -4,12 +4,14 @@ import matplotlib.pyplot as plt
 
 image_size =128
 batch_size = 32
+num_classes=4
 
 dataset_test=tf.keras.preprocessing.image_dataset_from_directory(
     'C:/Users/dohac/Documents/dataset of project/Combined Dataset/test',
     shuffle=True,
     image_size=(image_size,image_size),
     batch_size=batch_size
+    color_mode="grayscale"
 )
 
 dataset_train=tf.keras.preprocessing.image_dataset_from_directory(
@@ -17,6 +19,7 @@ dataset_train=tf.keras.preprocessing.image_dataset_from_directory(
     shuffle=True,
     image_size=(image_size,image_size),
     batch_size=batch_size
+    color_mode="grayscale"
 )
 
 class_names_test=dataset_test.class_names
@@ -49,7 +52,7 @@ dataset_train = dataset_train.prefetch(buffer_size=AUTOTUNE)
 dataset_test = dataset_test.prefetch(buffer_size=AUTOTUNE)
 
 model = models.Sequential([
-    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(image_size, image_size, 3)),
+    layers.Conv2D(32, (3, 3), activation='relu', input_shape=(image_size, image_size,1)),
     layers.MaxPooling2D((2, 2)),
 
     layers.Conv2D(64, (3, 3), activation='relu'),
@@ -64,7 +67,7 @@ model = models.Sequential([
     layers.Flatten(),
     layers.Dense(128, activation='relu'),
     layers.Dropout(0.5),
-    layers.Dense(dataset_train.cardinality().numpy(), activation='softmax')
+    layers.Dense(num_classes, activation='softmax')
     ])
 
 model.compile(optimizer='adam',
