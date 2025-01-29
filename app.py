@@ -26,12 +26,13 @@ model = load_model()
 
 # Function to preprocess the image
 def preprocess_image(image_file):
-    image = Image.open(image_file)
+    image = Image.open(image_file).convert("L")  # Convert to grayscale
     image = image.resize((128, 128))
-    image_arr = np.array(image.convert("L"))
-    image_arr = image_arr / 255.0  # Normalize the image
-    image_arr = np.expand_dims(image_arr, axis=0)
+    image_arr = np.array(image) / 255.0  # Normalize
+    image_arr = np.expand_dims(image_arr, axis=-1)  # Add channel dimension (H, W, 1)
+    image_arr = np.expand_dims(image_arr, axis=0)   # Add batch dimension (1, H, W, 1)
     return image_arr
+
 
 # Sidebar for image upload
 st.sidebar.title("📤 Upload Image")
